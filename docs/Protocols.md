@@ -13,10 +13,10 @@ In Xray-lite, we implement a specialized handshake logic often referred to as **
 
 ## xhttp (Next-Gen Transport)
 
-The `xhttp` protocol is designed for better multiplexing and resilience against active probing. 
-- It wraps data in HTTP/2 frames.
-- It is highly resistant to traffic analysis as it looks identical to standard web application traffic.
-- Optimized in Xray-lite for low-latency transmission.
+- **Asymmetric Compatibility / 非对称兼容**: Fully compatible with any official Xray/V2Ray client (e.g., v2rayNG, Nekoray). You get kernel-level protection without needing special client modifications.
+- **Kernel-Level Acceleration / 内核级处理**: Integrates with **XDP/TC** to process packet headers at the driver level, significantly reducing CPU overhead and latency compared to standard user-space implementations.
+- **Adaptive Traffic Pacing / 自适应流量整形**: Implements microsecond-level egress pacing via **TC eBPF**, smoothing out burst patterns to eliminate "proxy-typical" traffic fingerprints.
+- Optimized in Xray-lite for low-latency transmission using a **Zero-Copy** architecture.
 
 ## Security Advantages
 
