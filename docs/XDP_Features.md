@@ -1,6 +1,6 @@
 # XDP & Kernel Defense (Advanced)
 
-The XDP Edition of Xray-lite leverages Linux eBPF technology to move security logic into the kernel. This provides a "Hardware-like" defense that is invisible to most scanners.
+[The XDP Edition of Xray-lite](https://github.com/undead-undead/xray-lite/tree/feature/dynamic-xdp) leverages Linux eBPF technology to move security logic into the kernel. This provides a "Hardware-like" defense that is invisible to most scanners.
 
 ## Dual-Stack XDP Firewall
 
