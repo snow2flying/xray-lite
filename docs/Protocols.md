@@ -13,10 +13,21 @@ In Xray-lite, we implement a specialized handshake logic often referred to as **
 
 ## xhttp (Next-Gen Transport)
 
-- **Asymmetric Compatibility / 非对称兼容**: Fully compatible with any official Xray/V2Ray client (e.g., v2rayNG, Nekoray). You get kernel-level protection without needing special client modifications.
-- **Kernel-Level Acceleration / 内核级处理**: Integrates with **XDP/TC** to process packet headers at the driver level, significantly reducing CPU overhead and latency compared to standard user-space implementations.
-- **Adaptive Traffic Pacing / 自适应流量整形**: Implements microsecond-level egress pacing via **TC eBPF**, smoothing out burst patterns to eliminate "proxy-typical" traffic fingerprints.
-- Optimized in Xray-lite for low-latency transmission using a **Zero-Copy** architecture.
+The `xhttp` protocol in Xray-lite is enhanced with a **Mimicry Defense Engine** that provides superior resistance to traffic analysis and active probing.
+
+### Core Features:
+
+- **H2 Ping-Pong Noise / 随机心跳混淆**:
+    - Periodically sends randomized H2 PING frames (every 15-45s).
+    - Forces bi-directional background noise that masks connection timing and interferes with statistical analysis.
+- **Adaptive Traffic Shaping (Shredder) / 自适应流量整形**:
+    - **Random Chunking**: Splits data streams into randomly sized blocks (8KB - 16KB) to eliminate predictable packet length patterns.
+    - **Adaptive Padding**: Injects dynamic padding in HTTP headers that adjusts its size based on real-time traffic volume (Security-priority for low traffic, Performance-priority for high traffic).
+- **Chameleon Headers / 拟态请求头**:
+    - Mimics standard **Nginx 1.26.0** response headers (`Cache-Control`, `Server`).
+    - Injects randomized `x-padding` alphanumeric noise to evade header-length-based fingerprinting.
+
+---
 
 ## Security Advantages
 
