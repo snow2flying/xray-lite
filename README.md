@@ -32,11 +32,23 @@ bash <(curl -fsSL https://raw.githubusercontent.com/undead-undead/xray-lite/main
 bash <(curl -fsSL https://raw.githubusercontent.com/undead-undead/xray-lite/feature/dynamic-xdp/install.sh)
 ```
 
+## Graphical Panel / 图形化面板
+
+[x-ui-lite](https://github.com/undead-undead/x-ui-lite) is a lightweight web panel designed specifically for Xray-lite.
+- **Hot Reload**: Supports seamless configuration updates for both **v0.4.6** (Standard) and **v0.6.0** (XDP) without service interruption.
+- **Easy Management**: Visualize your traffic, manage clients, and monitor kernel-level XDP stats.
+
+[x-ui-lite](https://github.com/undead-undead/x-ui-lite) 是专为 Xray-lite 设计的轻量化面板。
+- **热重载支持**：完美适配 **v0.4.6** (标准版) 与 **v0.6.0** (XDP 版)，配置变更即时生效，无需重启服务。
+- **便捷管理**：可视化流量统计、客户端管理及 XDP 内核防火墙状态监控。
+
 
 
 
 
 If you think the project is good, you can support the developers.
+
+
 https://buymeacoffee.com/undeadundead
 
 
