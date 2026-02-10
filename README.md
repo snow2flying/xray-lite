@@ -1,105 +1,136 @@
-# Xray-Lite (XDP Edition)
+# Xray-Lite
 
-> Lightweight, Kernel-Accelerated VLESS Proxy in Rust.  
-> 基于 Rust 实现的轻量级内核加速 VLESS 代理。
+A lightweight, high-performance VLESS + Reality proxy server implemented in pure Rust. Fully compatible with all Xray/V2Ray clients.
 
-[Quick Install](#install) | [English](#english) | [中文](#chinese) | [Русский](#russian) | [فارسی](#persian)
+一个轻量级、高性能的纯 Rust 实现的 VLESS + Reality 代理服务器。完全兼容所有 Xray/V2Ray 客户端。
 
----
+[Documentation](https://github.com/undead-undead/xray-lite/wiki) | [Report Bug](https://github.com/undead-undead/xray-lite/issues)
 
-<a name="install"></a>
-## Quick Install / 快速安装
+## Key Features / 核心特性
+
+*   **Extreme Performance**: Built with Rust, native `epoll` / `io_uring` support for low latency and high concurrency.
+*   **Secure by Design**: Memory-safe implementation, minimal attack surface.
+*   **XDP Firewall** (New!): Kernel-level defense against `UDP Flood`, `TCP SYN Flood`, and `Illegal Packets`.
+*   **Stealthy**: Reality protocol support for perfect camouflage.
+*   **Static Binary**: Zero dependencies, runs on any Linux distro.
+
+## Quick Installation / 快速安装
+
+> **Note**: This is a **static compilation version** that works perfectly on **any Linux system** (Debian, Ubuntu, CentOS, Alpine, etc.) without dependency issues.
+>
+> **注意**：此为**静态编译版本**，完美适配**任何 Linux 系统** (Debian, Ubuntu, CentOS, Alpine 等)，无需担心依赖问题。
+
+### 1. Standard Installation (Recommended) / 标准版安装（推荐）
+
+> **Current Version: v0.4.6**
 
 ```bash
-# XDP Edition (Stealth & Kernel Protection)
+bash <(curl -fsSL https://raw.githubusercontent.com/undead-undead/xray-lite/main/install.sh)
+```
+
+### 2. XDP Installation (Performance Enhanced) / XDP 版安装（性能增强版）
+
+> **Current Version: v0.6.0-xdp (Rate Limit)**
+> 
+> **Requirements**: Linux Kernel ≥ 5.4 (AMD64 only), Root privileges.
+
+```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/undead-undead/xray-lite/feature/dynamic-xdp/install.sh)
 ```
 
----
+**New XDP Features / XDP 新特性:**
+*   **XDP Firewall**: Kernel-level protection against **UDP Floods**, **TCP SYN Floods (Rate Limiting)** & **Illegal Flags**. / 基于 eBPF 技术的内核级 UDP 洪水、TCP SYN 洪水（限流）和非法标志防御。
+*   **Anti-Probe**: Instantly drops **UDP Floods** & **Illegal TCP Packets** (e.g., Null Scan, SYN+FIN). / 在网卡驱动层直接丢弃 UDP 洪水和非法 TCP 包。（支持 TCP 限流）。
+*   **Ultimate Stealth**: XDP drops malicious probing packets silently (DROP), while standard Web traffic is allowed (PASS). / XDP 静默丢弃探测包（无法抓包），正常 Web 流量无感放行。
+*   **Smart Protection**: Only protects configured VLESS ports (e.g., 443), allowing other services (SSH) to work normally. / 仅保护配置的 VLESS 端口（如 443），不影响其他服务（如 SSH）。
 
-<a name="english"></a>
-## English
+The script will: / 脚本将自动：
+1. Detect Kernel & Architecture / 检测内核与架构
+2. Download optimized XDP binary / 下载 XDP 优化版二进制
+3. Auto-attach XDP program to NIC / 自动挂载 XDP 程序到网卡
+4. Generate keys and start service / 生成密钥并启动服务
 
-Xray-lite is a high-performance proxy server built for ultra-stealth and network resilience. Unlike the official Xray implementation, Xray-lite utilizes Linux kernel eBPF (XDP/TC) technology to process traffic at the NIC driver level, providing unmatched protection and efficiency.
+### 3. Build from Source / 从源码构建
 
-### Key Features
-- **Kernel-Level Defense (XDP)**: Automatically drops UDP Floods, SYN Floods, and Malicious Probes at the network driver layer.
-- **Adaptive Egress Pacing**: Smooths outbound traffic using TC eBPF with microsecond precision and random jitter to defeat traffic analysis.
-- **Ultra-Lightweight**: Written in pure Rust with an asynchronous core, consuming minimal CPU and RAM.
-- **Asymmetric Compatibility**: Fully compatible with any official Xray/V2Ray client (e.g., v2rayNG, Shadowsocks-libev) while providing superior server-side protection.
-- **Stealth Protocols**: Specifically optimized for **VLESS + Reality + XHTTP**.
+```bash
+# Clone the repository / 克隆仓库
+git clone https://github.com/undead-undead/xray-lite.git
+cd xray-lite
 
-### Why Xray-Lite?
-Official Xray operates entirely in user space. Xray-lite moves critical security and performance logic into the Linux kernel using eBPF, making it nearly invisible to network scanning tools and significantly harder to analyze.
+# Build Release version / 编译发布版
+cargo build --release
 
----
+# Run / 运行
+./target/release/vless-server -c config.json
+```
 
-<a name="chinese"></a>
-## 中文
+## Configuration / 配置
 
-Xray-lite 是一款专为极致隐蔽和网络抗性设计的轻量级代理服务器。与官方 Xray 不同，Xray-lite 利用 Linux 内核 eBPF (XDP/TC) 技术在网卡驱动层处理流量，提供无与伦比的防护和效率。
-
-### 核心特性
-- **内核级防御 (XDP)**：在网卡驱动层自动丢弃 UDP 洪水、SYN 洪水和恶意扫描探测。
-- **自适应出站整形**：利用 TC eBPF 实现微秒级精度的出站流量平滑，引入随机抖动，有效抹除代理流量指纹特征。
-- **极致轻量**：纯 Rust 实现，异步并发核心，占用极低的 CPU 和 内存资源。
-- **非对称兼容**：完美兼容任何原版 Xray/V2Ray 客户端（如 v2rayNG），无需特殊客户端即可享受内核级服务端加固。
-- **精选协议支持**：专注于最强防封组合：**VLESS + Reality + XHTTP**。
-
----
-
-<a name="russian"></a>
-## Русский
-
-Xray-lite — это высокопроизводительный прокси-сервер, созданный для максимальной скрытности и устойчивости сети. В отличие от официальной реализации Xray, Xray-lite использует технологию eBPF (XDP/TC) ядра Linux для обработки трафика на уровне драйвера сетевой карты, обеспечивая непревзойденную защиту и эффективность.
-
-### Основные характеристики
-- **Защита на уровне ядра (XDP)**: Автоматически сбрасывает UDP-флуд, SYN-флуд и вредоносные сканирования на уровне сетевого драйвера.
-- **Адаптивное формирование трафика**: Сглаживает исходящий трафик с помощью TC eBPF с микросекундной точностью и случайным джиттером для обхода анализа трафика.
-- **Сверхлегкий**: Написан на чистом Rust с асинхронным ядром, потребляя минимум ресурсов процессора и оперативной памяти.
-- **Асимметричная совместимость**: Полностью совместим с любым официальным клиентом Xray/V2Ray (например, v2rayNG), обеспечивая при этом превосходную защиту на стороне сервера.
-- **Протоколы**: Оптимизирован для **VLESS + Reality + XHTTP**.
-
----
-
-<a name="persian"></a>
-## فارسی
-
-Xray-lite یک سرور پروکسی با کارایی بالا است که برای پنهان‌کاری فوق‌اعاده و مقاومت شبکه ساخته شده است. برخلاف پیاده‌سازی رسمی Xray، Xray-lite از فناوری eBPF (XDP/TC) هسته لینوکس برای پردازش ترافیک در سطح درایور کارت شبکه استفاده می‌کند که محافظت و کارایی بی‌نظیری را فراهم می‌کند.
-
-### ویژگی های کلیدی
-- **دفاع در سطح هسته (XDP)**: به طور خودکار حملات UDP Flood، SYN Flood و اسکن‌های مخرب را در لایه درایور شبکه مسدود می‌کند.
-- **تنظیم ترافیک تطبیقی**: ترافیک خروجی را با استفاده از TC eBPF با دقت میکروثانیه و لرزش تصادفی (jitter) برای شکست دادن تحلیل ترافیک، هموار می‌کند.
-- **فوق‌العاده سبک**: نوشته شده با Rust خالص با هسته ناهمگام، که حداقل CPU و RAM را مصرف می‌کند.
-- **سازگاری نامتقارن**: کاملاً با هر کلاینت رسمی Xray/V2Ray (مانند v2rayNG) سازگار است در حالی که محافظت برتر سمت سرور را فراهم می‌کند.
-- **پروتکل‌ها**: بهینه‌سازی شده برای **VLESS + Reality + XHTTP**.
-
----
-
-## Configuration Example / 配置示例
+### config.json
 
 ```json
 {
-  "inbounds": [{
-    "port": 443,
-    "protocol": "vless",
-    "settings": {
-      "clients": [{ "id": "uuid-here" }],
-      "decryption": "none"
-    },
-    "streamSettings": {
-      "network": "tcp",
-      "security": "reality",
-      "realitySettings": {
-        "dest": "www.apple.com:443",
-        "serverNames": ["www.apple.com"],
-        "privateKey": "your-private-key",
-        "shortIds": ["0123456789abcdef"]
+  "log": {
+    "level": "info",
+    "access": "/var/log/xray/access.log",
+    "error": "/var/log/xray/error.log"
+  },
+  "inbounds": [
+    {
+      "port": 443,
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "your-uuid-here",
+            "flow": ""
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "dest": "www.microsoft.com:443",
+          "xver": 0,
+          "serverNames": [
+            "www.microsoft.com",
+            "www.bing.com"
+          ],
+          "privateKey": "your-private-key",
+          "shortIds": [
+            ""
+          ]
+        }
       }
     }
-  }]
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom"
+    }
+  ]
 }
 ```
+If you think the project is good, you can support the developers.
+https://buymeacoffee.com/undeadundead
 
-## License
-MIT
+
+crypto:
+
+Sol: 9QFKQ3jpBSuNPLZQH1uq5GrJm4RDKue82zeVaXwazcmj
+
+
+Base：0x4cf0b79aea1c229dfb1df9e2b40ea5dd04f37969
+
+
+## Contributing / 贡献
+
+We welcome all kinds of contributions! Please verify that `cargo test` passes before submitting a PR.
+欢迎各种形式的贡献！提交 PR 前请确保通过 `cargo test`。
+
+## License / 许可证
+
+[MPL-2.0](LICENSE)
