@@ -9,13 +9,21 @@ Xray-lite is a lightweight, high-performance VLESS + Reality proxy server implem
 - **Kernel-Level Acceleration**: Uses eBPF (XDP/TC) for firewalling and traffic shaping (XDP Edition).
 - **Stealth First**: Optimized for Reality and xhttp protocols to evade detection.
 
+<a name="quick-start"></a>
+## Quick Start
+
+1. **Install**: Run the installation script from the README.
+2. **Configure**: Edit `config.json` with your UUID and Reality keys.
+3. **Run**: Start the server using `./vless-server -c config.json`.
+4. **Client Setup**: Use any VLESS-compatible client and input the server details.
+
 ## Navigation
 
-- [Quick Start Guide](Home#quick-start)
-- [Configuration Reference](Configuration)
-- [Core Protocols (Reality, xhttp, XTLS-Reality64)](Protocols)
-- [XDP & Kernel Defense](XDP_Features)
-- [Performance Tuning](Performance)
+- [Quick Start Guide](#quick-start)
+- [Configuration Reference](./Configuration.md)
+- [Core Protocols (Reality, xhttp, XTLS-Reality64)](./Protocols.md)
+- [XDP & Kernel Defense](./XDP_Features.md)
+- [Performance Tuning](./Performance.md)
 
 ## Why Xray-Lite?
 
