@@ -2,7 +2,7 @@
 
 A lightweight, high-performance VLESS + Reality + XTLS-Reality64 proxy server implemented in pure Rust. Fully compatible with all Xray/V2Ray clients.
 
-一个轻量级、高性能的纯 Rust 实现的 VLESS + Reality + xhttp 代理服务器。完全兼容所有 Xray/V2Ray 客户端。
+一个轻量级、高性能的纯 Rust 魔改的 VLESS + Reality + xhttp 代理服务器
 
 [Documentation](./docs/Home.md) | [x-ui-lite Panel](https://github.com/undead-undead/x-ui-lite) | [Report Bug](https://github.com/undead-undead/xray-lite/issues)
 
