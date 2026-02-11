@@ -32,6 +32,18 @@ bash <(curl -fsSL https://raw.githubusercontent.com/undead-undead/xray-lite/main
 bash <(curl -fsSL https://raw.githubusercontent.com/undead-undead/xray-lite/feature/dynamic-xdp/install.sh)
 ```
 
+### Deployment Verification / 部署验证
+
+```bash
+# Verify XDP Attachment / 验证 XDP 挂载
+ip link show eth0
+# Output: prog/xdp id 1381 tag 480c33de76109440 jited
+
+# Verify TC Egress Pacing / 验证 TC 出口整形
+tc filter show dev eth0 egress
+# Output: tc_egress_pacing direct-action id 1382 tag 91a2f3c69e21e88f jited
+```
+
 ## Graphical Panel / 图形化面板
 
 [x-ui-lite](https://github.com/undead-undead/x-ui-lite) is a lightweight web panel designed specifically for Xray-lite.
