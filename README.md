@@ -44,6 +44,8 @@ tc filter show dev eth0 egress
 # Output: tc_egress_pacing direct-action id 1382 tag 91a2f3c69e21e88f jited
 ```
 
+![XDP and TC Pacing Success Verification](docs/assets/xdp_success.png)
+
 ## Graphical Panel / 图形化面板
 
 [x-ui-lite](https://github.com/undead-undead/x-ui-lite) is a lightweight web panel designed specifically for Xray-lite.
