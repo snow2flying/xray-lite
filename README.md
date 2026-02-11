@@ -22,11 +22,14 @@ A lightweight, high-performance VLESS + Reality + XTLS-Reality64 proxy server im
 bash <(curl -fsSL https://raw.githubusercontent.com/undead-undead/xray-lite/main/install.sh)
 ```
 
-### 2. [XDP Installation (Performance Enhanced) / XDP 版安装（性能增强版）](https://github.com/undead-undead/xray-lite/blob/main/docs/XDP_Features.md)
+### 2. 🔴 **[XDP Installation (Performance Enhanced) / XDP 版安装（性能增强版）](https://github.com/undead-undead/xray-lite/blob/main/docs/XDP_Features.md)**
 
 > **Current Version: v0.6.0-xdp (Rate Limit)**
 > 
-> **Requirements**: Linux Kernel ≥ 5.4 (AMD64 only), Root privileges.
+> **Kernel Recommendations / 内核达标推荐**: 
+> - **Optimal (最佳)**: Linux Kernel **≥ 5.15** (e.g., Ubuntu 22.04+, Debian 12+) - *Full XDP + TC EDT Pacing support.*
+> - **Minimum (最低)**: Linux Kernel **≥ 5.4** - *Basic XDP support.*
+> - **Note**: AMD64 Architecture & Root privileges required.
 
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/undead-undead/xray-lite/feature/dynamic-xdp/install.sh)
