@@ -40,7 +40,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/undead-undead/xray-lite/feat
 ```bash
 # Verify XDP Attachment / 验证 XDP 挂载
 ip link show eth0
-# Output: prog/xdp id 1381 tag 480c33de76109440 jited
+# Output: prog/xdp id 366 tag 480c33de76109440 jited
 ```
 
 ![XDP Success Verification](docs/assets/xdp_success.png)
