@@ -1,8 +1,8 @@
 # Xray-Lite
 
-A lightweight, high-performance Rust VLESS proxy with Reality & XHTTP support. Powered by eBPF kernel-level XDP Firewall and TC-EDT Traffic Pacing for ultimate stealth.
+A lightweight, high-performance Rust VLESS proxy with Reality & XHTTP support. Powered by eBPF kernel-level XDP Firewall for ultimate stealth.
 
-一个轻量级、高性能的纯 Rust 实现的 VLESS + Reality + xhttp 代理服务器。基于 eBPF 技术的 XDP 内核防火墙与 TC-EDT 流量整形，实现极致隐身与安全。
+一个轻量级、高性能的纯 Rust 实现的 VLESS + Reality + xhttp 代理服务器。基于 eBPF 技术的 XDP 内核防火墙，实现极致隐身与安全。
 
 [Documentation](./docs/Home.md) | [x-ui-lite Panel](https://github.com/undead-undead/x-ui-lite) | [Report Bug](https://github.com/undead-undead/xray-lite/issues)
 
