@@ -27,7 +27,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/undead-undead/xray-lite/main
 > **Current Version: v0.6.0-xdp (Rate Limit)**
 > 
 > **Kernel Recommendations / 内核达标推荐**: 
-> - **Optimal (最佳)**: Linux Kernel **≥ 5.15** (e.g., Ubuntu 22.04+, Debian 12+) - *Full XDP + TC EDT Pacing support.*
+> - **Optimal (最佳)**: Linux Kernel **≥ 5.15** (e.g., Ubuntu 22.04+, Debian 12+) - *Full XDP support.*
 > - **Minimum (最低)**: Linux Kernel **≥ 5.4** - *Basic XDP support.*
 > - **Note**: AMD64 Architecture & Root privileges required.
 
@@ -41,13 +41,9 @@ bash <(curl -fsSL https://raw.githubusercontent.com/undead-undead/xray-lite/feat
 # Verify XDP Attachment / 验证 XDP 挂载
 ip link show eth0
 # Output: prog/xdp id 1381 tag 480c33de76109440 jited
-
-# Verify TC Egress Pacing / 验证 TC 出口整形
-tc filter show dev eth0 egress
-# Output: tc_egress_pacing direct-action id 1382 tag 91a2f3c69e21e88f jited
 ```
 
-![XDP and TC Pacing Success Verification](docs/assets/xdp_success.png)
+![XDP Success Verification](docs/assets/xdp_success.png)
 
 ## Graphical Panel / 图形化面板
 
