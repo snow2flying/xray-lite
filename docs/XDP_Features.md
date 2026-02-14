@@ -2,6 +2,8 @@
 
 [The XDP Edition of Xray-lite](https://github.com/undead-undead/xray-lite/tree/feature/dynamic-xdp) leverages Linux eBPF technology to move security logic into the kernel. This provides a "Hardware-like" defense that is invisible to most scanners.
 
+
+Reduce latency:
 • Traditional path: Network adapter driver -> Software interrupt handling -> IP layer resolution -> TCP/UDP state machine handling -> User-mode switching -> VLESS program identification.
 
 • XDP path: Network adapter driver -> XDP program (your code) -> Discard directly or pass to the application.
