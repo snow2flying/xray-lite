@@ -4,6 +4,7 @@
 
 
 Reduce latency:
+
 • Traditional path: Network adapter driver -> Software interrupt handling -> IP layer resolution -> TCP/UDP state machine handling -> User-mode switching -> VLESS program identification.
 
 • XDP path: Network adapter driver -> XDP program (your code) -> Discard directly or pass to the application.
