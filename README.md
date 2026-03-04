@@ -22,7 +22,7 @@ A lightweight, high-performance Rust VLESS proxy with Reality & XHTTP support. P
 bash <(curl -fsSL https://raw.githubusercontent.com/undead-undead/xray-lite/main/install.sh)
 ```
 
-### 2. 🔴 **[XDP Installation (Performance Enhanced) / XDP 版安装（性能增强版）](https://github.com/undead-undead/xray-lite/blob/main/docs/XDP_Features.md)**
+### 2. 🔴 **[XDP Installation (Performance Enhanced) / XDP 版安装（性能增强版，推荐！！）](https://github.com/undead-undead/xray-lite/blob/main/docs/XDP_Features.md)**
 
 > **Current Version: v0.6.0-xdp (Rate Limit)**
 > 
